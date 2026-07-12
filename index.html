@@ -3,173 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#1a1d21">
-<title>Bengkel Digital</title>
+<meta name="theme-color" content="#f3f5f8">
+<title>Etalase — Aplikasi oleh Abduh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#15181b;
-    --panel:#1e2226;
-    --panel-raised:#252a2f;
-    --line:#33393f;
-    --amber:#f0a83c;
-    --amber-dim:#8a6428;
-    --blue:#4a7fa5;
-    --text:#e8e4d8;
-    --muted:#8b9096;
-    --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "Roboto Mono", Consolas, monospace;
+    --bg:#f3f5f8;
+    --surface:#ffffff;
+    --border:#e2e6ec;
+    --ink:#12172b;
+    --muted:#68708a;
+    --accent:#3654ff;
+    --accent-soft:#eaedff;
+    --accent-ink:#22307a;
+    --success:#1f9d55;
+    --success-soft:#e7f7ed;
+    --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
-  html,body{margin:0;padding:0;}
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; padding:0; }
   body{
-    background:
-      radial-gradient(ellipse at top, #1c2024 0%, var(--bg) 55%);
-    color:var(--text);
-    font-family:var(--font-sans);
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
     min-height:100vh;
-    padding:28px 16px 48px;
+    padding:22px 16px 48px;
   }
-  .wrap{ max-width:560px; margin:0 auto; }
+  .wrap{ max-width:640px; margin:0 auto; }
 
-  header{
-    text-align:center;
-    margin-bottom:30px;
+  /* header */
+  header{ margin-bottom:22px; }
+  .brand-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:16px;
   }
-  header .eyebrow{
-    font-family:var(--font-mono);
-    font-size:11px;
-    letter-spacing:0.22em;
-    color:var(--amber-dim);
-    text-transform:uppercase;
-    margin-bottom:10px;
-  }
-  header h1{
-    font-size:26px;
+  .brand-mark{
+    width:40px; height:40px;
+    border-radius:11px;
+    background:linear-gradient(135deg, var(--accent), #6f8bff);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff;
+    font-family:var(--font-display);
     font-weight:800;
-    letter-spacing:0.01em;
-    margin:0 0 8px;
+    font-size:17px;
+    flex-shrink:0;
   }
-  header p{
-    font-size:13px;
-    color:var(--muted);
+  .brand-text h1{
+    font-family:var(--font-display);
+    font-size:19px;
+    font-weight:800;
     margin:0;
-    line-height:1.5;
+    letter-spacing:-0.01em;
+  }
+  .brand-text p{
+    font-size:12px;
+    color:var(--muted);
+    margin:2px 0 0;
+  }
+
+  .search-row{
+    display:flex;
+    align-items:center;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:11px 14px;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .search-row svg{ flex-shrink:0; color:var(--muted); }
+  .search-row input{
+    border:none; outline:none; background:transparent;
+    font-family:var(--font-body);
+    font-size:14px;
+    color:var(--ink);
+    width:100%;
+  }
+  .search-row input::placeholder{ color:var(--muted); }
+
+  .filter-row{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:2px;
+    margin-bottom:20px;
+  }
+  .filter-row::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex-shrink:0;
+    font-family:var(--font-body);
+    font-size:12.5px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .chip.active{
+    background:var(--ink);
+    border-color:var(--ink);
+    color:#fff;
+  }
+
+  .section-label{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 10px 2px;
   }
 
   .grid{
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:12px;
   }
 
-  /* nameplate card */
-  .plate{
-    position:relative;
-    background:
-      linear-gradient(160deg, #262b30 0%, #1d2125 55%, #21262b 100%);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:18px 18px 16px;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 6px 16px rgba(0,0,0,0.25);
+  /* app card */
+  .app-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:16px;
   }
-  .rivet{
-    position:absolute;
-    width:6px; height:6px;
-    border-radius:50%;
-    background:#3a4046;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06);
-  }
-  .rivet.tl{ top:9px; left:9px; }
-  .rivet.tr{ top:9px; right:9px; }
-  .rivet.bl{ bottom:9px; left:9px; }
-  .rivet.br{ bottom:9px; right:9px; }
-
-  .plate-top{
+  .app-top{
     display:flex;
-    align-items:center;
-    gap:14px;
-    margin-bottom:14px;
+    gap:13px;
+    margin-bottom:12px;
   }
-  .plate-icon{
-    width:56px; height:56px;
-    border-radius:12px;
+  .app-icon{
+    width:58px; height:58px;
+    border-radius:15px;
     overflow:hidden;
     flex-shrink:0;
-    border:1px solid var(--line);
-    background:#101214;
+    border:1px solid var(--border);
+    background:#f6f7fa;
   }
-  .plate-icon img{ width:100%; height:100%; display:block; }
+  .app-icon img{ width:100%; height:100%; display:block; object-fit:cover; }
 
-  .plate-info{ flex:1; min-width:0; }
-  .plate-info .id-tag{
-    font-family:var(--font-mono);
-    font-size:10px;
-    color:var(--amber-dim);
-    letter-spacing:0.12em;
-    margin-bottom:3px;
-  }
-  .plate-info h2{
-    font-size:16.5px;
-    font-weight:800;
-    margin:0 0 4px;
-    letter-spacing:0.005em;
-  }
-  .plate-info p{
-    font-size:12.5px;
-    color:var(--muted);
-    margin:0;
-    line-height:1.4;
-  }
-
-  .plate-meta{
+  .app-info{ flex:1; min-width:0; }
+  .app-info .name-row{
     display:flex;
-    gap:8px;
-    margin-bottom:14px;
+    align-items:center;
+    gap:7px;
     flex-wrap:wrap;
   }
-  .badge{
-    font-family:var(--font-mono);
-    font-size:10px;
-    letter-spacing:0.05em;
-    padding:4px 9px;
-    border-radius:20px;
-    border:1px solid var(--line);
+  .app-info h2{
+    font-family:var(--font-display);
+    font-size:16px;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.005em;
+  }
+  .cat-tag{
+    font-size:10.5px;
+    font-weight:700;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    padding:3px 8px;
+    border-radius:6px;
+    font-family:var(--font-body);
+  }
+  .app-info .desc{
+    font-size:12.5px;
     color:var(--muted);
-    background:rgba(0,0,0,0.15);
+    margin:5px 0 0;
+    line-height:1.45;
   }
-  .badge.status-ok{ color:#7fbf7f; border-color:rgba(127,191,127,0.35); }
 
-  .plate-actions{
+  .app-meta{
     display:flex;
+    align-items:center;
     gap:10px;
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    color:var(--muted);
+    margin-bottom:13px;
   }
+  .meta-dot{ width:5px; height:5px; border-radius:50%; background:var(--success); flex-shrink:0; }
+  .meta-item{ display:flex; align-items:center; gap:5px; }
+
+  .app-actions{ display:flex; gap:9px; }
   .btn{
     flex:1;
     text-align:center;
-    padding:11px 10px;
-    border-radius:9px;
+    padding:10.5px 10px;
+    border-radius:10px;
     font-size:13px;
     font-weight:700;
     text-decoration:none;
-    letter-spacing:0.01em;
+    font-family:var(--font-body);
     border:1px solid transparent;
     cursor:pointer;
   }
-  .btn-primary{
-    background:var(--amber);
-    color:#1a1508;
-  }
-  .btn-secondary{
-    background:var(--panel-raised);
-    border-color:var(--line);
-    color:var(--text);
-  }
-  .btn-secondary:active{ border-color:var(--blue); color:var(--blue); }
+  .btn-primary{ background:var(--accent); color:#fff; }
+  .btn-secondary{ background:var(--surface); border-color:var(--border); color:var(--ink); }
 
-  .empty-slot{
-    border:1px dashed var(--line);
-    border-radius:14px;
-    padding:22px 18px;
+  .empty-state{
+    text-align:center;
+    padding:36px 20px;
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  .coming-soon{
+    border:1.5px dashed var(--border);
+    border-radius:16px;
+    padding:22px 16px;
     text-align:center;
     color:var(--muted);
     font-size:12.5px;
@@ -178,62 +228,142 @@
 
   footer{
     text-align:center;
-    font-size:10.5px;
+    font-size:11px;
     color:var(--muted);
-    letter-spacing:0.05em;
-    margin-top:30px;
-    font-family:var(--font-mono);
+    margin-top:28px;
+    font-family:var(--font-body);
   }
+  footer a{ color:var(--accent); text-decoration:none; font-weight:600; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Panel Kontrol</div>
-    <h1>Bengkel Digital</h1>
-    <p>Kumpulan alat bantu hitung buatan sendiri untuk kerja di bengkel.</p>
+    <div class="brand-row">
+      <div class="brand-mark">A</div>
+      <div class="brand-text">
+        <h1>Etalase</h1>
+        <p>Aplikasi buatan Abduh, siap pakai di HP</p>
+      </div>
+    </div>
+
+    <div class="search-row">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="search-input" placeholder="Cari aplikasi...">
+    </div>
+
+    <div class="filter-row" id="filter-row"></div>
   </header>
 
-  <div class="grid">
+  <div class="section-label" id="result-label">Semua Aplikasi</div>
+  <div class="grid" id="app-grid"></div>
 
-    <!-- App card: RPM Bengkel -->
-    <div class="plate">
-      <div class="rivet tl"></div><div class="rivet tr"></div>
-      <div class="rivet bl"></div><div class="rivet br"></div>
-
-      <div class="plate-top">
-        <div class="plate-icon">
-          <img src="https://abduh-max.github.io/rpm-bengkel/icon-192.png" alt="Ikon RPM Bengkel">
-        </div>
-        <div class="plate-info">
-          <div class="id-tag">APP-001</div>
-          <h2>RPM Bengkel</h2>
-          <p>Kalkulator Cutting Speed &amp; RPM untuk bubut dan milling</p>
-        </div>
-      </div>
-
-      <div class="plate-meta">
-        <span class="badge status-ok">● Aktif</span>
-        <span class="badge">v1.0</span>
-        <span class="badge">Bisa Offline</span>
-        <span class="badge">Bubut / Milling</span>
-      </div>
-
-      <div class="plate-actions">
-        <a class="btn btn-primary" href="https://github.com/abduh-max/rpm-bengkel/releases/download/v1.0/app-release-signed.apk">Unduh APK</a>
-        <a class="btn btn-secondary" href="https://abduh-max.github.io/rpm-bengkel/" target="_blank" rel="noopener">Buka di Browser</a>
-      </div>
-    </div>
-
-    <!-- Placeholder for future apps -->
-    <div class="empty-slot">
-      Slot aplikasi berikutnya akan muncul di sini
-    </div>
-
-  </div>
-
-  <footer>Dikelola langsung dari GitHub Pages</footer>
+  <footer>Dikelola langsung dari <a href="https://github.com/abduh-max" target="_blank" rel="noopener">GitHub</a></footer>
 </div>
+
+<script>
+  // ---- Daftar aplikasi: tambahkan objek baru di sini untuk aplikasi berikutnya ----
+  const APPS = [
+    {
+      id: 'rpm-bengkel',
+      name: 'RPM Bengkel',
+      category: 'Teknik Mesin',
+      description: 'Kalkulator Cutting Speed & RPM untuk bubut dan milling.',
+      version: 'v1.0',
+      offline: true,
+      icon: 'https://abduh-max.github.io/rpm-bengkel/icon-192.png',
+      apkUrl: 'https://github.com/Abduh-max/rpm-bengkel/releases/download/v1.0/RPM.Bengkel.apk',
+      browserUrl: 'https://abduh-max.github.io/rpm-bengkel/'
+    }
+    // Contoh menambah aplikasi baru nanti:
+    // {
+    //   id: 'nama-app',
+    //   name: 'Nama Aplikasi',
+    //   category: 'Kategori Baru',
+    //   description: 'Deskripsi singkat satu baris.',
+    //   version: 'v1.0',
+    //   offline: true,
+    //   icon: 'https://.../icon-192.png',
+    //   apkUrl: 'https://.../nama.apk',
+    //   browserUrl: 'https://.../'
+    // }
+  ];
+
+  let activeCategory = 'Semua';
+  let searchTerm = '';
+
+  const grid = document.getElementById('app-grid');
+  const filterRow = document.getElementById('filter-row');
+  const resultLabel = document.getElementById('result-label');
+  const searchInput = document.getElementById('search-input');
+
+  function buildFilters(){
+    const categories = ['Semua', ...new Set(APPS.map(a => a.category))];
+    filterRow.innerHTML = '';
+    categories.forEach(cat => {
+      const chip = document.createElement('div');
+      chip.className = 'chip' + (cat === activeCategory ? ' active' : '');
+      chip.textContent = cat;
+      chip.addEventListener('click', () => {
+        activeCategory = cat;
+        buildFilters();
+        render();
+      });
+      filterRow.appendChild(chip);
+    });
+  }
+
+  function cardHTML(app){
+    return `
+      <div class="app-card">
+        <div class="app-top">
+          <div class="app-icon"><img src="${app.icon}" alt="Ikon ${app.name}"></div>
+          <div class="app-info">
+            <div class="name-row">
+              <h2>${app.name}</h2>
+              <span class="cat-tag">${app.category}</span>
+            </div>
+            <p class="desc">${app.description}</p>
+          </div>
+        </div>
+        <div class="app-meta">
+          <span class="meta-item"><span class="meta-dot"></span>Aktif</span>
+          <span class="meta-item">${app.version}</span>
+          ${app.offline ? '<span class="meta-item">Bisa Offline</span>' : ''}
+        </div>
+        <div class="app-actions">
+          <a class="btn btn-primary" href="${app.apkUrl}">Unduh APK</a>
+          <a class="btn btn-secondary" href="${app.browserUrl}" target="_blank" rel="noopener">Buka di Browser</a>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    const filtered = APPS.filter(a => {
+      const matchCategory = activeCategory === 'Semua' || a.category === activeCategory;
+      const matchSearch = a.name.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchCategory && matchSearch;
+    });
+
+    resultLabel.textContent = activeCategory === 'Semua' ? 'Semua Aplikasi' : activeCategory;
+
+    if (filtered.length === 0){
+      grid.innerHTML = '<div class="empty-state">Tidak ada aplikasi yang cocok.</div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(cardHTML).join('') + '<div class="coming-soon">Aplikasi berikutnya menyusul di sini</div>';
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    searchTerm = e.target.value;
+    render();
+  });
+
+  buildFilters();
+  render();
+</script>
 </body>
 </html>
